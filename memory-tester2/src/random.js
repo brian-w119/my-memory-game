@@ -48,6 +48,8 @@ let img1, img2, img3, img4, img5, img6, img7, img8, img9, img10;
 let storageArr = [];
 let indexArr = [];
 let count = 0;
+let initialImages = [];
+let reshuffledArr = [];
 
 //generates random image
 function createRandom() {
@@ -71,7 +73,7 @@ function pushAddValues() {
       const newValue = createRandom();
       !indexArr.includes(newValue) ? pushToArrays(newValue) : "";
       count++;
-      console.log(`count:  ${count}`);
+      //console.log(`count:  ${count}`);
    } while (count < 10);
 
    //removing duplicates
@@ -93,7 +95,9 @@ export default function initateRandom() {
    pushFirstValue();
    pushAddValues();
    adjustLength();
-   destructureImg(storageArr);
+   destructureImg(storageArr); 
+   //console.log(storageArr)
+   initialImages = [...storageArr]; //not used in this module
    return [storageArr];
 }
 
@@ -105,12 +109,11 @@ function adjustLength() {
 
 function reShuffle() {
    count = 0;
+  // pushToArrays = [];
    indexArr = [];
    storageArr = [];
-   // createRandom();
-   //pushToArrays();
-   //pushFirstValue();
    initateRandom();
+   reshuffledArr = [...storageArr];
 }
 
 export {
@@ -125,4 +128,6 @@ export {
    img9,
    img10,
    reShuffle,
+   initialImages,
+   reshuffledArr
 };

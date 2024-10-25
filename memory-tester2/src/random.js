@@ -108,6 +108,7 @@ function adjustLength() {
 }
 
 function reShuffle() {
+   storageArr = [];
    count = 0;
   // pushToArrays = [];
    indexArr = [];

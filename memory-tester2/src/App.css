@@ -45,3 +45,8 @@ body{
   bottom: 50%;
   margin-left: 5vw;
 }
+
+#title{
+  color: white;
+  text-align: center;
+}

@@ -15,7 +15,9 @@ const Cards = ({id, className, img, boxclicked, onClick}) => {
 
 //parent component
 const App = () => {
+  const imageFunction = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10];
   let finalScore = 0;
+  let boxArr = [];
 
   // invokes random function, and assigns images to repsecive boxes
   {window.onload = initiateRandom();
@@ -23,6 +25,12 @@ const App = () => {
   };
   const [boxState, setBoxState] = useState(initialImages);
   const [isClickable, SetIsClickable] = useState(true);
+  //const [newGame, setNewgame] = useState(window.location.reload(false));
+  const [display, setDisplay] = useState("The aim is to click on an image only once");
+
+  const pageReload = () => {
+    window.location.reload(false)
+  };
 
   //reshuffles all images and updates state.
   const updateImgs = (e) => {
@@ -33,15 +41,32 @@ const App = () => {
     console.log(boxState);
   };
 
+  const updateDisplay = () => {
+    /*let text;
+    if(selectedImgs.length < 9){
+      text = "The aim is to click on an image only once";
+    }
+    if(selectedImgs.length > 9){
+      text = finalScore;
+    }
+    return text;
+    */
+    console.log(display);
+    setDisplay(() => `${finalScore}`);
+    console.log(display);
+    
+  };
+
   //reloads new images and saves clicked image to an array
   const captureClicked = (e, imgSrc) => {
     updateImgs(e);
     selectedImgs.push(e.target.id);
+    selectedImgs.length === 11 ? selectedImgs.pop(): null;
     console.log(selectedImgs);
   };
 
   const calculateScore = () => {
-    if(selectedImgs.length > 9){
+    if(selectedImgs.length > 9 & selectedImgs.length < 11){
       SetIsClickable(false);
       console.log("10 clicks reached");
       console.log(selectedImgs);
@@ -51,9 +76,37 @@ const App = () => {
       finalScore = uniqueItems.size * 10;
       finalScore = "Your score is "+ finalScore+"%";
       alert(finalScore);
+     // updateDisplay();
       return finalScore;
     }
   };
+
+  const renderImages = () => {
+    for(let i = 0; i < 10; i++){
+      const box =  <Cards img={imageFunction[i]()} onClick={(e) => {
+        calculateScore();
+        isClickable ? captureClicked(e, imageFunction[i]()) : null;
+      }} className="box"/>
+      boxArr.push(box);
+    }
+    return boxArr;
+  };
+  return(
+   <>
+     <h1>Test Your Memory</h1>
+     <div id="container">
+       {renderImages()}
+     </div>
+     <button className="reload" onClick={() => pageReload()}>Start New Game</button>
+     <div className="scoreDisplay"></div>
+   </>
+  )
+};
+
+export default App;
+
+//removed code
+  /*
   return(
    <>
     <div id="container">
@@ -106,17 +159,18 @@ const App = () => {
           calculateScore();
           isClickable ? captureClicked(e, img10()) : null;
         }} className="box"/>
+
+        {renderImages()}
      </div>
+     
     <button id="score" onClick={() => {
-      window.location.reload;
-      initateRandom();
-     }
-    }>Start</button>
+        window.location.reload;
+        initateRandom();
+       }
+      }>Start</button>
     </>
   );
-};
-
-export default App;
+  */
 
 
 

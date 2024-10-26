@@ -4,6 +4,12 @@ body{
   background-color: black;
 }
 
+h1{
+  color: white;
+  text-align: center;
+  margin-top: 8vh;
+}
+
 #container{
   width: 55vw;
   height: 50vh;
@@ -36,7 +42,7 @@ body{
   height: 100%;
 }
 
-#score{
+.reload{
   background-color: white;
   width: 10vw;
   height: 5vh;
@@ -49,4 +55,15 @@ body{
 #title{
   color: white;
   text-align: center;
+}
+
+.scoreDisplay{
+  width: 15vw;
+  height: 10vh;
+  background-color: white;
+  color: red;
+  position: absolute;
+  left: 3vw;
+  top: 36%;
+  
 }
